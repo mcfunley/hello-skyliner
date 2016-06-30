@@ -1,15 +1,14 @@
 # Our base image is Ruby 2.3, running on Alpine Linux.
 FROM ruby:2.3-alpine
 
-ENV \
-  # Build packages are system packages that are only required for installing
-  # gems, precompiling assets, etc. They are not included in the final Docker
-  # image.
-  BUILD_PACKAGES="sqlite-dev" \
+# Build packages are system packages that are only required for installing
+# gems, precompiling assets, etc. They are not included in the final Docker
+# image.
+ENV BUILD_PACKAGES sqlite-dev
 
-  # Runtime packages are system packages that are required for the application
-  # to run. They are included in the final Docker image.
-  RUNTIME_PACKAGES="sqlite-libs"
+# Runtime packages are system packages that are required for the application
+# to run. They are included in the final Docker image.
+ENV RUNTIME_PACKAGES sqlite-libs
 
 # Copy your application into the container.
 COPY . .
