@@ -14,6 +14,10 @@ with Docker.
    registry.
 6. Go to Skyliner and deploy!
 
+If you want Puma to run more Rails processes, add a configuration parameter
+named `WEB_CONCURRENCY`. It defaults to `2`. If you want Rails to run more Ruby
+threads, add a configuration parameter named `MAX_THREADS`. It defaults to `2`.
+
 ## Differences from a stock Rails application
 
 * Depends on Heroku's `rails_12factor` gem, which directs the logs to stdout and
@@ -22,3 +26,14 @@ with Docker.
   a secret with all digits from being interpreted as a number.
 * Depends on `puma-heroku`, which borrows Heroku's recommended Puma
   configuration.
+
+## Docker tips
+
+* Use Alpine Linux as a base image. It's tiny.
+* Include OS updates along with each image build. This slows down images builds,
+  but ensures you have all security updates included in each deploy.
+* Separate out build dependencies (i.e. only required for compiling gems and
+  assets) and runtime dependencies (i.e. required for the app to run). Remove
+  build dependencies after the app is built to save space.
+* Build the application in a single `RUN` command. It looks gross, but reduces
+  the number of layers in your Docker image and saves space.
