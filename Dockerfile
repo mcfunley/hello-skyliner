@@ -2,9 +2,6 @@
 FROM ruby:2.3-alpine
 
 ENV \
-  # Run your application in production mode.
-  RAILS_ENV=production RACK_ENV=production \
-
   # Build packages are system packages that are only required for installing
   # gems, precompiling assets, etc. They are not included in the final Docker
   # image.
@@ -28,9 +25,9 @@ RUN \
     # Install application gems.
     bundle install --without development test --with production && \
     # Precompile Rails assets.
-    bundle exec rake assets:precompile && \
+    RAILS_ENV=production bundle exec rake assets:precompile && \
     # Clean up build packages.
     apk del --purge build-packages && rm -rf /var/cache/apk/*
 
 # Run your application with Puma.
-CMD puma
+CMD puma -e production
