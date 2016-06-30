@@ -30,7 +30,12 @@ RUN \
     # Precompile Rails assets.
     RAILS_ENV=production bundle exec rake assets:precompile && \
     # Clean up build packages.
-    apk del --purge build-packages && rm -rf /var/cache/apk/*
+    apk del --purge build-packages && \
+    # Delete APK and gem caches.
+    find / -type f -iname \*.apk-new -delete && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /usr/local/lib/ruby/gems/*/cache/* && \
+    rm -rf ~/.gem
 
 # Run your application with Puma.
 CMD puma -e production
