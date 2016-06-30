@@ -23,7 +23,7 @@ RUN \
     # Install runtime packages.
     apk add --virtual runtime-packages nodejs tzdata $RUNTIME_PACKAGES && \
     # Install application gems.
-    bundle install --without development test --with production && \
+    bundle install --jobs 4 --without development test --with production && \
     # Precompile Rails assets.
     RAILS_ENV=production bundle exec rake assets:precompile && \
     # Clean up build packages.
