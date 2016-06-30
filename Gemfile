@@ -24,13 +24,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Puma as our app server
 gem 'puma'
+gem 'puma-heroku'
 
 group :production do
-  # Run our app in production as a 12-factor app.
+  # Improve Rails logging and log JSON-formatted messages to stdout.
   gem 'rails_12factor'
-
-  # Borrow Heroku's Puma configuration.
-  gem 'puma-heroku'
+  gem 'lograge'
+  gem 'logstash-event'
 end
 
 group :development, :test do

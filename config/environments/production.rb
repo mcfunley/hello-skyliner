@@ -1,4 +1,8 @@
 Rails.application.configure do
+  # Enable lograge with JSON event formatting.
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Logstash.new
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

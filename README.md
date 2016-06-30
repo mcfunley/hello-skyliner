@@ -20,8 +20,11 @@ threads, add a configuration parameter named `MAX_THREADS`. It defaults to `2`.
 
 ## Differences from a stock Rails application
 
+* Depends on the `lograge` gem, which converts Rails's weirdly verbose logging
+  into production-ready logging using Logstash JSON formatting.
 * Depends on Heroku's `rails_12factor` gem, which directs the logs to stdout and
-  allows Rails to serve up static assets.
+  allows Rails to serve up static assets. (If static asset serving becomes a
+  performance hotspot, we recommend setting up CloudFront.)
 * Adds quotes to the use of `SECRET_KEY_BASE` in `secrets.yaml`, which prevents
   a secret with all digits from being interpreted as a number.
 * Depends on `puma-heroku`, which borrows Heroku's recommended Puma
