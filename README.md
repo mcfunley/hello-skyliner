@@ -10,9 +10,15 @@ with Docker.
 3. Create an application in Skyliner named `hello-skyliner`.
 4. Add a configuration parameter named `SECRET_KEY_BASE`. Generate two different
    values for it using `rake secret`. Use one for QA, the other for Production.
-5. Run `./push.sh` to build and push the image to your private AWS Docker
-   registry.
-6. Go to Skyliner and deploy!
+5. Go to the settings for the application and copy the application token.
+6. Run `docker build -t hello-skyliner .` to build a Docker image of the
+   application.
+7. Run `docker save hello-skyliner -o hello-skyliner.tar` to save your Docker
+   image for upload.
+8. Run `./upload.sh <app token> hello-skyliner.tar` to upload the image to
+   Skyliner.
+9. Go to Skyliner and deploy!
+10. For additional deploys, just repeat steps 6-9.
 
 If you want Puma to run more Rails processes, add a configuration parameter
 named `WEB_CONCURRENCY`. It defaults to `2`. If you want Rails to run more Ruby
