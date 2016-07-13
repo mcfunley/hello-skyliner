@@ -3,7 +3,7 @@ set -euo pipefail # enable strict mode
 IFS=$'\n\t'
 
 if [[ (-z "${1-}") || (-z "${2-}") ]]; then
-    echo "./push.sh <app token> <image filename>"
+    echo "./upload.sh <app token> <image filename>"
     exit -1
 fi
 
