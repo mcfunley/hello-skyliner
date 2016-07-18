@@ -18,7 +18,7 @@ docker save hello-skyliner -o image.tar
 COMMIT=$(git rev-parse HEAD)
 
 # get the upload URL
-URL=$(curl -s -X POST https://www.skyliner.io/images/docker/$TOKEN/$COMMIT)
+URL=$(curl -s -X POST http://localhost:8080/images/docker/$TOKEN/$COMMIT)
 
 # upload to S3
 curl --progress-bar --upload-file image.tar $URL > /dev/null
